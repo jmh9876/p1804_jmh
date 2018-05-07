@@ -1,0 +1,6 @@
+echo "# jia_12345" >> README.md
+git init
+git add 1.txt
+git commit -m "first README.md"
+git remove add origin https://githud.com/jmh9876/jia_12345.git
+git push -u originmasterk
