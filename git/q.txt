@@ -1,0 +1,227 @@
+    1  vimtutor
+    2  sudo apt install vim-runtime
+    3  vimtutor
+    4  sudo apt install vim-runtime
+    5  ping www.baidu.com
+    6  sudo apt install vim
+    7  vimtutor
+    8  sim
+    9  vim
+   10  sudo apt install vim-runtime
+   11  vim-runtime
+   12  vim
+   13  sudo apt-get update
+   14  sudo apt install vim-runtime 
+   15  vim
+   16  sudo apt install vim-runtime 
+   17  vim
+   18  sudo apt install vim
+   19  vimtutor
+   20  vim qingshu.txt
+   21  ls
+   22  vimtutor
+   23  rm qingshu.txt
+   24  rm -rf qingahu.txt
+   25  vim xiaohuahua.txt
+   26  sudo apt inatall git
+   27  ping www.baidu.com
+   28  sudo apt install git
+   29  git clone --depth=1 https://github.com/amix/vimrc.git~/.vim_runtime 
+   30  git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime 
+   31  sh ~/.vim_runtime/install_awesome_vimrc.sh
+   32  vim qingshu.txt
+   33  ls
+   34  set numble
+   35  vim
+   36  ifconfig
+   37  sudo apt-get install openssh-server
+   38  ifconfig
+   39  sudo useradd asd
+   40  sudo passwd asd
+   41  su asd
+   42  pwd
+   43  touch a.txt
+   44  su asd
+   45  ssh asd@192.168.43.240
+   46  su asd
+   47  sudo su asd
+   48  mkdir demo
+   49  mkdir 1804
+   50  cd 1804
+   51  cd ..
+   52  cd demo
+   53  mkdir -p a/s/d/f
+   54  cd ..
+   55  su asd
+   56  scp a.tst qwe@192.168.43.248:/home/qwe/demo
+   57  scp ./a.tst qwe@192.168.43.248:/home/qwe/demo
+   58  scp .a.tst qwe@192.168.43.248:/home/qwe/demo
+   59  su asd
+   60  scp ./a.txt jmh@192.168.43.248:/home/jmh/demo
+   61  scp a.txt jmh@192.168.43.248:/home/jmh/demo
+   62  scp .a.txt jmh@192.168.43.248:/home/jmh/demo
+   63  suasd
+   64  su asd
+   65  ls
+   66  pwd
+   67  clear
+   68  ls
+   69  pwd
+   70  mv /home/jmh/qingshu.txt ./demo/a/s/d/f
+   71  ln -s ./home/a/s/d/f/qingshu.txt qwe
+   72  cd home a s d f
+   73  cd -p home a s d f 
+   74  cd home 
+   75  cd -p demo a s d f 
+   76  cd demo\ a s d f
+   77  cd demo a s d f
+   78  cd a
+   79  cd s
+   80  cd d
+   81  cd f
+   82  ln -s /home/jmh/demo/a/s/d/f/qingshu.txt qwe
+   83  gedip qwe
+   84  groud qwe
+   85  grep qwe
+   86  sudo useradd asd
+   87  sudo userdel asd
+   88  ls 
+   89  pwd
+   90  mkdir 1
+   91  rm -rf a.txt
+   92  rm -rf qwe
+   93  rm -rf lll
+   94  cd 1
+   95  touch 1.txt
+   96  cd ..
+   97  rm -rf 1
+   98  tree
+   99  sudo apt install tree
+  100  tree
+  101  cd -p demo/a/s/d/f
+  102  cd demo
+  103  cd a
+  104  cd s
+  105  cd d
+  106  rm qingshu.txt
+  107  rm qwe
+  108  tree
+  109  cd ../..
+  110  cd ..
+  111  tree
+  112  grep f
+  113  ls 
+  114  pwd
+  115  ls -a
+  116  sudo apt-get install openssh-server
+  117  ifconfig
+  118  sudo apt-get install openssh-server
+  119  ifconfig
+  120  sudu apt-get remove openssh-sever
+  121  sudo apt-get remove openssh-sever
+  122  sudo apt-get remove openssh-server
+  123  sudo apt-get install openssh-server
+  124  ifconfig
+  125  sudo apt-get remove openssh-server
+  126  sudo apt-get install openssh-server
+  127  ifconfig
+  128  cd demo
+  129  scp ./1.txt jmh@192.168.43.240:/home/jmh
+  130  scp ./w jmh@192.168.43.240:/home/jmh
+  131  scp -r ./w jmh@192.168.43.240:/home/jmh
+  132  scp jmh@192.168.43.240:/home/jmh/a/s/1.txt
+  133  scp jmh@192.168.43.240:/home/jmh/a/s/12.txt
+  134  scp jmh@192.168.43.240:/home/jmh/1.txt 2.txt
+  135  scp jmh@192.168.43.240:/home/jmh/demo1.txt
+  136  scp jmh@192.168.43.240:/home/jmh/demo/1.txt 2.txt
+  137  scp jmh@192.168.43.240:/home/jmh/demo/w p
+  138  scp -r jmh@192.168.43.240:/home/jmh/demo/w p
+  139  scp -r jmh@192.168.43.240:/home/jmh/demo/w
+  140  grep 1.txt
+  141  gedit
+  142  cat 1.txt
+  143  gedit 1.txt
+  144  hoistory > 1.txt
+  145  history > 1.txt
+  146  cat 1.txt
+  147  shutdown
+  148  shutdown -c
+  149  shutdown -r
+  150  shutdown -r now
+  151  init6
+  152  ini t6
+  153  init 6
+  154  init 0
+  155  shutdown -r now
+  156  echo "# p1804_jmh" >> README.md
+  157  git into 
+  158  git init
+  159  git add README.md
+  160  git commit -m "first commit"
+  161  git config --global user.email "2210744940@qq.com"
+  162  git config --global user.name "jmh9876"
+  163  git commit -m "first commit"
+  164  ls
+  165  pwd
+  166  ls
+  167  git remote add origin https://github.com/jmh9876/p1804_jmh.git
+  168* 
+  169  git commit -m "first commit"
+  170  git remote add origin https://github.com/jmh9876/p1804_jmh.git
+  171  git push -u origin master
+  172  ifconfig
+  173  git add
+  174  git add READNE.md
+  175  pwd
+  176  gedit README.md
+  177  git add README.md
+  178  git commit -m "第一次“
+：wq
+exit
+
+
+
+  179  mkdir git
+  180  cd git
+  181  touch 123.txt
+  182  git add 123.txt
+  183  git commit -m "第一次说明"
+  184  git push -u origin master
+  185  mv README.md ./git/
+  186  mv /home/jhm/README.md ./git/
+  187  mv /home/jhm/README.md ./git
+  188  mv README.md git/
+  189  cd git 
+  190  cd git
+  191  cd ..
+  192  mv README.md git/
+  193  cd git
+  194  vi README.md
+  195  git add README.md
+  196  git commit -m "第一次说明"
+  197  git push -u origin master
+  198  vi 123.txt
+  199  git commit -m "第一次说明"
+  200  git commit -m "第二次说明"
+  201  git add 123.txt
+  202  git commit -m "第二次说明"
+  203  git push -u origin master
+  204  mkdir 1
+  205  cd 1
+  206  touch 12.txt
+  207  vi 12.txt
+  208  git add 12.txt
+  209  git commit -m "第二次说明"
+  210  git push -u origin master
+  211  touch 3.txt
+  212  vi 3.txt
+  213  git add 3.txt
+  214  git commit -m "第一次上传"
+  215  git push -u origin master
+  216  ls
+  217  ls -l
+  218  ls -ll
+  219  vim 12.txt
+  220  cd ..
+  221  touch q.txt
+  222  history > q.txt
