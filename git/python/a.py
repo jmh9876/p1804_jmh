@@ -1,0 +1,10 @@
+print ("si shen lai le")
+print ("ren sheng")
+1 print ("si shen lai le")\
+2 print ("ren sheng")
+1 print ("si shen lai le")
+2 print ("ren sheng")
+1 print ("si shen lai le")
+2 print ("ren sheng")
+1 print ("si shen lai le")
+2 print ("ren sheng")
