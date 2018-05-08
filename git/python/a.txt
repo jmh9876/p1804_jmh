@@ -1,0 +1,8 @@
+a=9
+b=6
+c=5
+d=a*b
+f=c+b
+g=a-c
+result=a*c+d-f
+print ("result =", result)
