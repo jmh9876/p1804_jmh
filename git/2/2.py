@@ -1,0 +1,12 @@
+xingming='贾梦豪'
+xingbie='男'
+nianling='20'
+aihao='运动，健身'
+财产='50万'
+公司='豪有钱有限公司'
+print('名字:',xingming)
+print('性别:',xingbie)
+print('年龄:',nianling)
+print('爱好:',aihao)
+print('财产:',财产)
+print('公司:',公司)
