@@ -1,6 +1,9 @@
-q=input("请输入您想要得金字塔高度:")
-w=1 #第一行的星数
-e=q #高度等于行数
-while w <= q:
-    print(""*e," *"*w)
+q=int(input("请输入您想要得金字塔高度:"))
+w=1
+a=q
+while a > 0:
+    print(" "*a,"*"*w)
+    a=a-1
+    w=w+2
+
 
