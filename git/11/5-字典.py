@@ -1,0 +1,11 @@
+dic={'name':'张三','age':22,'sex':'男','dianhua':110,'se':'医生'}
+dic['name']
+k_list=dic.keys
+print(dic.keys)
+print(k_list)
+v_list=dic.values
+print(dic.values)
+print(v_list)
+kv_list=dic.items
+pritn(dic.items)
+print(kv_list)
