@@ -1,0 +1,7 @@
+name=input('请输入要复制的内容:')
+file=open('name','r')
+new=open('gebi.txt','w')
+content=file.read()
+new.write(content)
+file.close()
+new.close()
