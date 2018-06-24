@@ -1,0 +1,7 @@
+
+. 什么是异常   error
+2. 单个异常  try :    except a:
+3. 多个异常  try:     except (a,b,c):
+4. 异常显示  as a :
+5. 全部异常  try:    except Exception as a:
+6. 异常捕获最终要执行的 方法 ：  finally
