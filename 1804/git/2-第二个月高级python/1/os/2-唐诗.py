@@ -1,0 +1,15 @@
+f=open('3.txt','w')
+f.write('貂蝉跑了，吕布骑赤兔去追貂蝉，董卓骑白龙马杀吕布\n')
+f.close()
+
+f1=open('3.txt','r')
+a=f1.readlines()
+p=f1.tell()
+for i in a:
+    print(i[0:-1]+'*')
+print('读取第一行的内容是:%s'%a)
+print('读取第一行的游标位置是:%s'%p)
+f1.close()
+print('该文件的名字是:%s'%f1.name)
+print('该文件是否关闭:%s'%f1.closed)
+print('该文件的打开模式是:%s'%f1.mode)

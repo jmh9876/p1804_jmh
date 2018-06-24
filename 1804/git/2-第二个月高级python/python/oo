@@ -1,0 +1,19 @@
+q=9
+w=5
+e=6
+result = q-w
+print ('result =',result)
+result = q+w
+print ('result =',result)
+result =q*e
+print ('result =',result)
+result =q/w
+print ("result =",result)
+result = q//w
+print ('result =',result)
+result = w%e
+print ('result =',result)
+result = q**w
+print ('result =',result)
+
+

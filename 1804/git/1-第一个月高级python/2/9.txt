@@ -1,0 +1,15 @@
+#coding=utf-8
+#获取输入价格
+price=input('请您输入西瓜的价格:')
+#获取输入重量
+weight=input('请您输入西瓜的重量:')
+
+#...................................
+#把输入的str类型数据转化为float类型
+xgprice=float(price)
+xgweight=float(weight)
+
+计算西瓜的总额
+print('该西瓜的单价是%.2f元/斤'%（xgprice）)
+print('该西瓜的重量是%.2f元/斤'%（xgweight）)
+print('该西瓜的总额是%.2f元/斤'%（money）)

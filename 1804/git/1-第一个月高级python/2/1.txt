@@ -1,0 +1,5 @@
+#coding=utf-8
+name=input
+print('你的名字是:',name)
+passwd=inpit('请输入你的密码')
+print('你的密码:', passwd)
