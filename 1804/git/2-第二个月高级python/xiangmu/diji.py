@@ -1,379 +1,341 @@
-#-*- coding=utf-8 -*-
+import pygame  #导入pygame包
 
-import pygame
+import random
 
-import time, random
-
-
-
-class Base(object):
-
-    """docstring for ClassName"""
-
-    def __init__(self, screen, x, y, image_name):
-
-        self.screen = screen
-
-        self.x = x
-
-        self.y = y
-
-         #3.英雄
-
-        self.image = pygame.image.load(image_name)
+from ji import *
 
 
 
-class BasePlane(Base):
+class Enemyplane(Plane):   #创建飞机类
 
-    def __init__(self, screen, x, y, image_name):
+    #初始值飞机图片路径、游戏窗口
 
-        Base.__init__(self, screen, x, y, image_name)
+    def __init__(self,ing_path,chuangkou):
 
-        # 4. 定义英雄的初始位置
+        Plane.__init__(self,ing_path,chuangkou,0,0)
 
-        self.rect = pygame.Rect(self.x, self.y, 102, 126)
+        self.flag = 'right'
 
-        self.bullet_list = [] #保持子弹引用
+        self.di_list=[]
 
-        self.bullet_remove = [] #保持待删除的子弹
+        self.panzha = False
+
+        self.num = 0
+
+        self.data = 0
+
+        self.dibaotu()
+
+    def move(self):#定义move方法使敌机左右移动
+
+        if self.flag == 'right':
+
+            self.Feiweizhi.x += 2
+
+        else:
+
+            self.Feiweizhi.x -= 2
 
 
 
-        self.hit = False #表示 没有击中 不爆炸
+        if self.Feiweizhi.x > 400 - self.Feiweizhi.width:
 
-        self.bomb_list = [] #保存爆炸效果图
+            self.flag = 'left'
 
-        self.__create_image() #添加图片
+        elif self.Feiweizhi.x <= 0:
 
-        self.image_num = 0 #While True增加次数，效果延迟
-
-        self.image_index = 0 # 爆炸图片id
+            self.flag = 'right'
 
 
 
-    def __create_image(self):
 
-        self.bomb_list.append(pygame.image.load('./images/hero_blowup_n1.png'))
 
-        self.bomb_list.append(pygame.image.load('./images/hero_blowup_n2.png'))
+     # 发射子弹
 
-        self.bomb_list.append(pygame.image.load('./images/hero_blowup_n3.png'))
+    def fire(self):
 
-        self.bomb_list.append(pygame.image.load('./images/hero_blowup_n4.png'))
+        a = Dizidan('./images/bullet1.png',self.chuangkou,self.Feiweizhi.x,self.Feiweizhi.y)#定义子弹的对象
 
-    def display(self):
+        self.bullet_list.append(a)#把子弹追加到子弹列表中
 
-        if self.hit == True:
+    def fire1(self):
 
-            self.screen.blit(self.bomb_list[self.image_index],self.rect)
+        a = Dizidan('./images/bullet1.png',self.chuangkou,self.Feiweizhi.x+70,self.Feiweizhi.y)#定义子弹的对象
 
-            self.image_num += 1
+        self.bullet_list.append(a)#把子弹追加到子弹列表中
 
-            if self.image_num == 7:
+    def dibaotu(self):
 
-                self.image_index += 1
+        u = pygame.image.load('./images/enemy1_down1.png')
 
-                self.image_num = 0
+        self.di_list.append(u)
 
-            if self.image_index > 3:
+        i = pygame.image.load('./images/enemy1_down2.png')
 
-                time.sleep(1)
+        self.di_list.append(i)
+
+        p = pygame.image.load('./images/enemy1_down3.png')
+
+        self.di_list.append(p)
+
+        y = pygame.image.load('./images/enemy1_down4.png')
+
+        self.di_list.append(y)
+
+    def baohuan1(self):
+
+        if self.panzha == True:
+
+            self.chuangkou.blit(self.di_list[self.num],self.Feiweizhi)
+
+            self.data += 1
+
+            if self.data == 10:
+
+                self.num += 1
+
+                self.data = 0
+
+            if self.num > 3:
 
                 exit()
 
-        else:
+    def dibaozha(self):
 
-            self.screen.blit(self.image,self.rect)
+        self.panzha = True
 
-        if len(self.bullet_list) > 0:
+class Dizidan(Tullet):   #创建子弹类
 
-            for bullet in self.bullet_list:
-
-                bullet.display()
-
-                bullet.move()
-
-                if bullet.judge():
-
-                    self.bullet_remove.append(bullet)
-
-            if len(self.bullet_remove) > 0:
-
-                for i in self.bullet_remove:
-
-                    self.bullet_list.remove(i)
-
-                # self.bullet_remove.clear()
-
-                del self.bullet_remove[:]
-
-    def bomb(self):
-
-        self.hit = True
-
-
-
-class HeroPlane(BasePlane):
-
-    """英雄的创建和展示类"""
-
-    def __init__(self, screen):
-
-        super(HeroPlane, self).__init__( screen, 150, 500, './images/hero1.png')
-
-
-
-
-
-    def fire(self):
-
-        self.bullet_list.append(Bullet(self.screen, self.rect.x, self.rect.y))
-
-
-
-class EnemyPlane(BasePlane):
-
-    """敌人飞机 创建和展示类"""
-
-    def __init__(self, screen):
-
-        super(EnemyPlane, self).__init__(screen, 0, 0, './images/enemy0.png')
-
-        self.direction = 'right' #保持敌机默认方向
-
-
+    #初始值子弹图片路径、游戏窗口
 
     def move(self):
 
-        if self.direction == 'right':
+        self.y += 6
 
-            self.rect.x += 5
-
-        elif self.direction == 'left':
-
-            self.rect.x -= 5
-
-
-
-        if self.rect.x > 480-self.rect.width:
-
-            self.direction = 'left'
-
-        elif self.rect.x < 0:
-
-            self.direction = 'right'
-
-
-
-    def fire(self):
-
-        if random.randint(1,100) == 78:
-
-            self.bullet_list.append(EnemyBullet(self.screen, self.rect.x, self.rect.y))
-
-
-
-class BaseBullet(Base):
-
-    """BaseBullet for ClassName"""
-
-    def __init__(self, screen ,x ,y ,image_name):
-
-        Base.__init__(self, screen, x, y, image_name)
-
-
-
-    def display(self):
-
-        self.screen.blit(self.image,(self.x, self.y))
-
-
-
-class Bullet(BaseBullet):
-
-    """docstring for Bullet"""
-
-    def __init__(self, screen ,x ,y):
-
-        BaseBullet.__init__(self, screen, x+40, y+20, './images/bullet.png')
-
-
-
-    def move(self):
-
-        self.y -= 4
-
-    def judge(self):
-
-        if self.y < 0:
-
-            return True
-
-        else:
-
-            return False
-
-
-
-class EnemyBullet(BaseBullet):
-
-    """docstring for Bullet"""
-
-    def __init__(self, screen ,x ,y):
-
-        BaseBullet.__init__(self, screen, x+25, y+40, './images/bullet1.png')
-
-
-
-    def move(self):
-
-        self.y += 4
-
-    def judge(self):
+    def judge(self):#判断子弹是否跑出屏幕外
 
         if self.y > 600:
 
-            return True
+            return True #表示子弹飞出屏幕
 
         else:
 
             return False
 
+class Feiji(Plane):
 
+    #初始值飞机图片路径、游戏窗口
 
+    def __init__(self,ing_path,chuangkou):
 
+        Plane.__init__(self,ing_path,chuangkou,(400-100)/2,350)
 
-def key_control(hero):
+        self.bao_list=[]
 
-    '''键盘的监听控制方法'''
+        self.panduanbao = False
 
-    move_step = 5
+        self.baotu()
 
-    move_x, move_y = 0, 0
+        self.a =0#定义图片的初始章数
 
-    # =====事件监听
+        self.b =0#秒数
 
-    for event in pygame.event.get():
+     # 发射子弹
 
-        # 判断用户是否点击了关闭按钮
+    def fire(self):
 
-        if event.type == pygame.QUIT:
+        a = Zidan('./images/bullet.png',self.chuangkou,self.Feiweizhi.x,self.Feiweizhi.y)#定义子弹的对象发出子弹就把他放到列表中
 
-            print("退出游戏...")
+        self.bullet_list.append(a)#把子弹追加到子弹列表中
 
-            pygame.quit()
 
-            # 直接退出系统
 
-            exit()
+    def fire1(self):
 
-        elif event.type == pygame.KEYDOWN:
+        a = Zidan('./images/bullet.png',self.chuangkou,self.Feiweizhi.x+70,self.Feiweizhi.y)#定义子弹的对象
 
-            #键盘有按下？
+        self.bullet_list.append(a)#把子弹追加到子弹列表中
 
-            if event.key == pygame.K_LEFT:
+    def baozha(self):
 
-                #按下的是左方向键的话，把x坐标减一
+        self.panduanbao = True
 
-                move_x = -move_step
+    def baotu(self):
 
-            elif event.key == pygame.K_RIGHT:
+        u = pygame.image.load('./images/hero_blowup_n1.png')
 
-                #右方向键则加一
+        self.bao_list.append(u)
 
-                move_x = move_step
+        i = pygame.image.load('./images/hero_blowup_n2.png')
 
-            elif event.key == pygame.K_UP:
+        self.bao_list.append(i)
 
-                #类似了
+        p = pygame.image.load('./images/hero_blowup_n3.png')
 
-                move_y = -move_step
+        self.bao_list.append(p)
 
-            elif event.key == pygame.K_DOWN:
+        y = pygame.image.load('./images/hero_blowup_n4.png')
 
-                move_y = move_step
+        self.bao_list.append(y)
 
-            elif event.key == pygame.K_SPACE:
+    def baohuan(self):
 
-                hero.fire()
+        if self.panduanbao == True:
 
-            elif event.key == pygame.K_b:
+            self.chuangkou.blit(self.bao_list[self.a],self.Feiweizhi)
 
-                hero.bomb()
+            self.b+=1
 
+            if self.b == 10:
 
+                self.a+=1
 
-        elif event.type == pygame.KEYUP:
+                self.b = 0
 
-            #如果用户放开了键盘，图就不要动了
+            if self.a > 3:
 
-            move_x = 0
+                self.Feiweizhi.x = 500
 
-            move_y = 0
+                self.Feiweizhi.y = 800
 
+                exit()
 
+class Zidan(Tullet):   #创建子弹类
 
+    #初始值子弹图片路径、游戏窗口
 
+    def move(self):
 
-        #计算出新的坐标
+        self.y -= 6
 
-        hero.rect.x += move_x
+    def judge(self):#判断子弹是否跑出屏幕外
 
-        hero.rect.y += move_y
+        if self.y < 5:
 
+            return True #表示子弹飞出屏幕
 
+        else:
 
-def main():# 主方法 调用 类和方法
+            return False
 
-    #1.窗口
+def jianshi(hero,move):
 
-    screen = pygame.display.set_mode((480,600),0,32)
+        for i in pygame.event.get():#游戏事件的监听，控制
 
-    #2.背景
+            if i.type == pygame.QUIT:#如果某一操作等于退出
 
-    background = pygame.image.load('./images/background.png')
+                print('退出程序')
 
-    #3.英雄
+                pygame.quit()#退出程序
 
-    hero = HeroPlane(screen)
+                #exit()
 
-    # 4.1. 创建游戏时钟对象
+            elif i.type == pygame.KEYDOWN:
 
-    clock = pygame.time.Clock()
+                if i.key == pygame.K_SPACE:
 
-    # 5创建一个敌人飞机
+                    hero.fire()
 
-    enemy = EnemyPlane(screen)
+                    hero.fire1()
 
+                elif i.key == pygame.K_z:
 
+                    hero.baozha()
 
-    while True:
+        keys = pygame.key.get_pressed()
 
-        screen.blit(background,(0,0))
+       # if keys[pygame.K_SPACE]or keys[pygame.K_x]:
 
-        hero.display()
+        #    hero.fire()
 
-        enemy.display()
+         #   hero.fire1()
 
-        enemy.move() #让敌机移动
+        if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
 
-        enemy.fire()
+            if hero.Feiweizhi.x < 400 - hero.Feiweizhi.width:
 
-        # 设置屏幕刷新帧率
+                hero.Feiweizhi.x += move
 
-        clock.tick(60)
+        if keys[pygame.K_LEFT] or keys[pygame.K_a]:
 
-        if hero.rect.y <= 0:
+            if hero.Feiweizhi.x > 0:
 
-            hero.rect.y = 500
+                hero.Feiweizhi.x -= move
 
-        key_control(hero)
+        if keys[pygame.K_DOWN] or keys[pygame.K_s]:
 
-        pygame.display.update()
+            if hero.Feiweizhi.y < 700 - hero.Feiweizhi.height:
 
+                hero.Feiweizhi.y += move
 
+        if keys[pygame.K_UP] or keys[pygame.K_w]:
 
-if __name__ == '__main__':
+            if hero.Feiweizhi.y > 0:
 
-    main()
+                hero.Feiweizhi.y -= move
+
+def yingxiongzha(hero,hero1):
+
+    for i in hero.bullet_list:
+
+        if (i.x > hero1.Feiweizhi.x and i.x < hero1.Feiweizhi.x +100 ) and (i.y > hero1.Feiweizhi.y and i.y < hero1.Feiweizhi.y +124):
+
+            hero1.dibaozha()
+
+def dipengzhuang(hero,hero1):
+
+    for i in hero1.bullet_list:
+
+        if (i.x > hero.Feiweizhi.x and i.x < hero.Feiweizhi.x +100) and (i.y >hero.Feiweizhi.y and i.y < hero.Feiweizhi.y +124):
+
+            hero.baozha()
+
+def feiji():#创建函数
+
+    chuangkou = pygame.display.set_mode((400,700),0,32)#定义游戏窗口大小
+
+    beijing = pygame.image.load('./images/background.png')#把背景图获取代码中
+
+    clock = pygame.time.Clock()#pygame中自带的时间包
+
+    hero = Feiji('./images/hero1.png',chuangkou)#创建一个飞机对象，传入路径参数
+
+
+
+    hero1 = Enemyplane('./images/enemy1.png',chuangkou)
+
+    while True: #循环输出
+
+        jianshi(hero,10)
+
+        chuangkou.blit(beijing,(0,0))#打背景图获取到代码上
+
+        hero.display()#对象调用类属性，把飞机图获取到代码上并定义位置
+
+        hero.baohuan()
+
+        hero1.display()
+
+        hero1.move()#调用move方法移动
+
+        num = random.randint(1,50)
+
+        if num == 11:
+
+            hero1.fire()
+
+            hero1.fire1()
+
+        dipengzhuang(hero,hero1)
+
+        yingxiongzha(hero,hero1)
+
+        hero1.baohuan1()
+
+        pygame.display.update()#刷新显示
+
+       # clock.tick(60)#每隔多少秒运行一下
+
+if __name__ == '__main__':#有权限的访问，只有自己可以调式，其他人调用不显示
+
+    feiji()
