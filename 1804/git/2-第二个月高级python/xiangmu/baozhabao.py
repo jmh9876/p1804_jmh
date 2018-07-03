@@ -43,7 +43,7 @@ class Plane(object):
 
         for event in self.bullet_list:
 
-            if event.judge():
+            if event.judge():#如果调用这个函数，判断子弹是否飞出屏幕外
 
                 self.bullet_list.remove(event)#调用列表删除子弹
 

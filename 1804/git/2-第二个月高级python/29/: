@@ -1,0 +1,11 @@
+class Dog_Jmh(object):
+    __flg = None
+    def __init__(self,name):
+        self.name=name
+    def __new__(cls,*a):
+        if cls.__flg == None:
+            cls.__flg = object.__new__(cls)
+        return cls.__flg
+xiao = Dog_Jmh('大黄')
+print('你的名字是:'xiao.name)
+print(id(xiao))

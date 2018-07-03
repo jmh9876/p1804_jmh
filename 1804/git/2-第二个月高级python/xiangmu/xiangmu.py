@@ -2,6 +2,56 @@ import pygame#导入包
 import random
 from baozhabao import *#导包,模块应用
 
+class Plane(object):
+
+    #这是飞机的抽象类
+
+    def __init__(self,img_path,screen,x,y):#初始化飞机类的属性
+
+        self.screen=screen#创建的窗口对象
+
+        self.x=x
+
+        self.y=y
+
+        self.w=100
+
+        self.h=124
+
+        self.img_path=img_path#飞机的路径
+
+        self.plane=pygame.image.load(self.img_path)#飞机图片
+
+        #定义好的位置，尺寸
+
+        self.rect=pygame.Rect(self.x,self.y,self.w,self.h)
+
+
+
+        #列表保存发出的子弹
+
+        self.bullet_list=[]
+
+
+
+    def display(self):
+
+        self.screen.blit(self.plane,self.rect)#设置飞机
+
+
+
+        #循环子弹列表
+
+        for event in self.bullet_list:
+
+            if event.judge():#如果调用这个函数，判断子弹是否飞出屏幕外
+
+                self.bullet_list.remove(event)#调用列表删除子弹
+
+            event.wei()#子弹的对象
+
+            event.move()#子弹调用子弹的函数
+
 
 class HeroPlane(Plane):
 
@@ -115,72 +165,17 @@ class EnemyPlane(Plane):
     def dibaozha(self):
         self.bao = True#重新定义初始值
 
-class EnemyPlane1(Plane):
+class BaseBullet(object):
+    def __init__(self,img_path,screen,x,y):#初始化子弹类
+        self.screen = screen#游戏窗口
+        self.x = x
+        self.y = y
+        self.img_path = img_path#子弹路径
+        self.bullet = pygame.image.load(self.img_path)#子弹图获取代码中，背景
 
-    #这是敌机的抽象类
+    def wei(self):
 
-    def __init__(self,img_path,screen):
-
-        Plane.__init__(self,img_path,screen,0,0)#子类调用父类的属性
-
-        self.flag = 'right'#定义一个初始值
-        self.di_list = []#创建敌机爆炸列表
-        self.bao = False#定义一个初始值
-        self.num = 0#定义初始化图片的下标
-        self.data = 0#秒数
-        self.dibaotu()#调用本身的爆图效果
-
-
-    def move(self):
-
-        #设置敌机的移动位置
-
-        if self.flag == 'right':
-
-            self.rect.x +=4
-
-        else:
-
-            self.rect.x -=4
-
-        if self.rect.x > 500 - self.rect.width:
-
-            self.flag ='left'
-
-        elif self.rect.x <= 0:
-
-            self.flag = 'right'
-
-    def fire(self):
-
-        #子弹追加到列表中
-
-        self.bullet_list.append(EnemyBullet('./images/bullet1.png',self.screen,self.rect.x+20,self.rect.y+30))
-
-        self.bullet_list.append(EnemyBullet('./images/bullet1.png',self.screen,self.rect.x-40,self.rect.y+30))
-
-
-    def dibaotu(self):
-        u = pygame.image.load('./images/enemy1_down1.png')#调用图片
-        self.di_list.append(u)#把图片追加到飞机爆炸列表之中
-        i = pygame.image.load('./images/enemy1_down2.png')
-        self.di_list.append(i)
-        p = pygame.image.load('./images/enemy1_down3.png')
-        self.di_list.append(p)
-        y = pygame.image.load('./images/enemy1_down4.png')
-        self.di_list.append(y)
-
-    def baohuan1(self):
-        if self.bao == True:#重新定义一个值
-            self.screen.blit(self.di_list[self.num],self.rect)#把爆炸的图片追加到窗口
-            self.data += 1#秒数
-            if self.data == 10:
-                self.num += 1
-                self.data = 0
-            if self.num > 3:
-                main()
-    def dibaozha(self):
-        self.bao = True#重新定义初始值
+        self.screen.blit(self.bullet,(self.x,self.y))#追加子弹图片追加到游戏窗口
 
 class Bullet(BaseBullet):#创建子弹类
 
