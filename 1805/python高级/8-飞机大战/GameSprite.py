@@ -1,6 +1,9 @@
 import pygame
 import random
 
+# 敌机的定时器事件常量
+CREATE_ENEMY_EVENT = pygame.USEREVENT
+
 SCREEN_RECT = pygame.Rect(0,0,480,700)#常量
 
 class GameSprite(pygame.sprite.Sprite):#父类 大写

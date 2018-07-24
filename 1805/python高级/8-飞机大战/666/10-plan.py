@@ -11,7 +11,12 @@ class PlanMain():
         #调用精灵组
         self.__create_sprites()
         # 4. 设置定时器事件 - 每秒创建一架敌机
-        pygame.time.set_timer(CREATE_ENEMY_EVENT, 1000)
+        pygame.time.set_timer(CREATE_ENEMY_EVENT, 800)
+
+        pygame.time.set_timer(CREATE_BULLET_EVENT, 300)
+
+        # 创建敌机精灵组
+        self.enemy_group = pygame.sprite.Group()
 
     def start_game(self):
 
@@ -42,14 +47,35 @@ class PlanMain():
                 PlaneGame.__game_over()
             elif event.type == CREATE_ENEMY_EVENT:
                 print("敌机出场...")
-            elif event.type == CREATE_ENEMY_EVENT:
-                self.enemy_group.add(Enemy())
-            elif event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
-                print("向右移动...")
+                enemy = Enemy()
+                self.enemy_group.add(enemy)
+                #讓英雄發射子彈
+            elif event.type == CREATE_BULLET_EVENT:
+                self.hero.fire()
+
+         # 获取用户按键
+        keys_pressed = pygame.key.get_pressed()
+
+        if keys_pressed[pygame.K_RIGHT]:
+            self.hero.speed = 2
+            print('向右')
+        elif keys_pressed[pygame.K_LEFT]:
+            self.hero.speed = -2
+            print('向左')
+        else:
+            self.hero.speed = 0
+            print('不移動')
+
 
     def __check_collide(self):
         """碰撞检测"""
-        pass
+        pygame.sprite.groupcollide(self.enemy_group,self.hero.bullet_group,True,True)
+
+        enemies = pygame.sprite.spritecollide(self.hero,self.enemy_group,True)
+
+        if len(enemies) > 0:
+            self.hero.kill()
+            PlanMain.__game_over()
 
     def __update_sprites(self):
         """更新精灵组"""
@@ -62,21 +88,21 @@ class PlanMain():
         self.hero_group.update()
         self.hero_group.draw(self.screen)
 
+        self.hero.bullet_group.update()
+        self.hero.bullet_group.draw(self.screen)
+
     def __create_sprites(self):
         '''创建精灵组'''
         bg1 = Background()
         bg2 = Background(True)
         self.back_group = pygame.sprite.Group(bg1,bg2)#创建精灵组
 
-        di = Enemy()
-        di1 = Enemy()
-        di2 = Enemy()
-        # 敌机组
-        self.enemy_group = pygame.sprite.Group(di,di1,di2)
 
-        hero = Hero()
         # 英雄组
-        self.hero_group = pygame.sprite.Group(hero)
+        self.hero = Hero()
+        self.hero_group = pygame.sprite.Group(self.hero)
+
+
     @staticmethod
 
     def __game_over():
