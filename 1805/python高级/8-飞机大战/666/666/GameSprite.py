@@ -83,7 +83,11 @@ class Hero(GameSprite):
         if self.rect.left <= 0:
             self.rect.left = 0
         if self.rect.right >= SCREEN_RECT.width:
-            self.rect.right = SCREEN_RECT.width
+            self.rect.right = SCREEN_RECT.widtih
+        if self.rect.top > 0:
+            self.rect.top -= 0
+        if self.rect.bottom <= SCREEN_RECT.height - 60:
+            self.rect.bottom += SCREEN_RECT.height - 60
 
     def fire(self):
         print('發射子彈')

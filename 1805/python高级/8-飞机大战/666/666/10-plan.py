@@ -62,6 +62,12 @@ class PlanMain():
         elif keys_pressed[pygame.K_LEFT]:
             self.hero.speed = -2
             print('向左')
+        elif keys_pressed[pygame.K_UP]:
+            self.hero.speed = -2
+            print('向上')
+        elif keys_pressed[pygame.K_DOWN]:
+            self.hero.speed = 2
+            print('向下')
         else:
             self.hero.speed = 0
             print('不移動')
