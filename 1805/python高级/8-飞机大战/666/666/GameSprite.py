@@ -16,6 +16,7 @@ class GameSprite(pygame.sprite.Sprite):#父类 大写
         self.image = pygame.image.load(image)#加载图像
         self.rect = self.image.get_rect()#设计尺寸
         self.speed = speed#记录速度
+
     def update(self):
         self.rect.y += self.speed#默认在垂直方向移动
 
@@ -28,11 +29,13 @@ class Background(GameSprite):
         #
         if is_alt:
             self.rect.y = -self.rect.height
+
     def update(self):
         super().update()#调用父类
         #把移除屏幕的背景放到屏幕上方
         if self.rect.y >= SCREEN_RECT.height:
             self.rect.y = -self.rect.height
+
 class Enemy(GameSprite):
     """敌机精灵"""
     def __init__(self):
@@ -66,17 +69,19 @@ class Hero(GameSprite):
     def __init__(self):
 
         super().__init__("./images/hero1.png")
-
-        self.bullet_group = pygame.sprite.Group()#创建子弹精灵组
+        self.speed1 = 0
 
         # 设置初始位置
         self.rect.centerx = SCREEN_RECT.centerx
         self.rect.bottom = SCREEN_RECT.bottom - 50
 
+        self.bullet_group = pygame.sprite.Group()#创建子弹精灵组
+
     def update(self):
         #super().update()
         # 飞机水平移动
         self.rect.x += self.speed
+        self.rect.y += self.speed1
 
 
         # 判断屏幕边界
@@ -84,10 +89,6 @@ class Hero(GameSprite):
             self.rect.left = 0
         if self.rect.right >= SCREEN_RECT.width:
             self.rect.right = SCREEN_RECT.widtih
-        if self.rect.top > 0:
-            self.rect.top -= 0
-        if self.rect.bottom <= SCREEN_RECT.height - 60:
-            self.rect.bottom += SCREEN_RECT.height - 60
 
     def fire(self):
         print('發射子彈')
@@ -98,18 +99,8 @@ class Hero(GameSprite):
         bullet.rect.x = self.rect.centerx
         bullet.rect.bottom = self.rect.top
 
-        bullet1 = Bullet()
-        bullet1.rect.x = self.rect.centerx + 35
-        bullet1.rect.bottom = self.rect.top + 30
-
-        bullet2 = Bullet()
-        bullet2.rect.x = self.rect.centerx - 35
-        bullet2.rect.bottom = self.rect.top + 30
-
         # 3. 将精灵添加到精灵组
         self.bullet_group.add(bullet)
-        self.bullet_group.add(bullet1)
-        self.bullet_group.add(bullet2)
 
 class Bullet(GameSprite):
 

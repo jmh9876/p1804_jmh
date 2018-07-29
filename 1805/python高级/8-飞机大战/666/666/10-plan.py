@@ -63,24 +63,28 @@ class PlanMain():
             self.hero.speed = -2
             print('向左')
         elif keys_pressed[pygame.K_UP]:
-            self.hero.speed = -2
-            print('向上')
+            self.hero.speed1 = -2
+            self.hero.speed = 0
         elif keys_pressed[pygame.K_DOWN]:
-            self.hero.speed = 2
-            print('向下')
+            self.hero.speed1 = 2
+            self.hero.speed = 0
         else:
+            self.hero.speed1 = 2
             self.hero.speed = 0
             print('不移動')
 
 
     def __check_collide(self):
         """碰撞检测"""
+        #子弹摧毁敌机
+        #敌机精灵组在前，并返回敌机的精灵
         pygame.sprite.groupcollide(self.enemy_group,self.hero.bullet_group,True,True)
 
         enemies = pygame.sprite.spritecollide(self.hero,self.enemy_group,True)
 
         if len(enemies) > 0:
             self.hero.kill()
+            #结束游戏
             PlanMain.__game_over()
 
     def __update_sprites(self):
